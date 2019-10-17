@@ -1,4 +1,11 @@
-/** Metodologia  OOCSS */
+/** Metodologia OOCSS **/
+
+$verde-color: green;
+$vermelho-color: red;
+
+@mixin position($value) {
+    margin-left: $value;
+}
 
 .container {
     width: 90%;
@@ -13,7 +20,7 @@
     }  
 }
 .green-titulo {
-    color: green;
+    color: $verde-color;
 }
 
 .borda {
@@ -22,10 +29,12 @@
 }
 
 .margem {
-    margin-left: 2em ;
+    @include position(2em) ;
 }
 
 .cor-fundo {
-  background-color: red;
+  background-color: $vermelho-color;
 }
+
 }
+
