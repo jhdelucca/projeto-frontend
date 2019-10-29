@@ -1,3 +1,5 @@
+import '../dist/css/main.css';
+import './img/favicon.ico';
 var esquerda = 37, cima = 38, direita = 39 , baixo = 40;  // inicializa as variaves com seus keyCode;
 var moveEsquerda = false, moveDireita = false, moveCima = false, moveBaixo = false;
 var canvas = document.querySelector("canvas")

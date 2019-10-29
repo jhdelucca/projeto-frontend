@@ -54,6 +54,20 @@ module.exports = {
                 test: /\.(jpe?g|ico|png|gif|svg)$/i,
                 loader: 'file-loader?name=img/[name].[ext]'
             },
+			
+			{
+				test: /\.(sa|sc|c)ss$/,
+                use: [
+                  {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        hmr: process.env.NODE_ENV === 'development',
+                    },
+                  },
+                  'css-loader',
+                  'sass-loader',
+                ],
+			},
 
             {
                 test: /\.css$/,
