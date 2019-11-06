@@ -4,10 +4,9 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 
 module.exports = {
@@ -27,12 +26,16 @@ module.exports = {
             filename: 'index.html',
             template: path.join(__dirname, 'src/index.html')
         }),
-
-        new ExtractTextPlugin('main.css'),
-
-        new UglifyJSPlugin() 
-
+		
+		 new MiniCssExtractPlugin({
+            filename: 'css/main.css'
+            }
+        ),
     ],
+	
+	optimization: {
+        minimizer: [new UglifyJsPlugin()],
+    },
 
     module: {
         rules: [
@@ -56,6 +59,18 @@ module.exports = {
             },
 			
 			{
+                test: /\.s[ac]ss$/i,
+                use: [
+                  // Creates `style` nodes from JS strings
+                  'style-loader',
+                  // Translates CSS into CommonJS
+                  'css-loader',
+                  // Compiles Sass to CSS
+                  'sass-loader',
+                ],
+            },
+			
+			{
 				test: /\.(sa|sc|c)ss$/,
                 use: [
                   {
@@ -68,14 +83,6 @@ module.exports = {
                   'sass-loader',
                 ],
 			},
-
-            {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                    })
-            }
         ]
     },
 
